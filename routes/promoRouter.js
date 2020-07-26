@@ -1,11 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
-const promotionRouter = express.Router();
+const promoRouter = express.Router();
 
-promotionRouter.use(bodyParser.json());
+promoRouter.use(bodyParser.json());
 
-promotionRouter.route('/')
+promoRouter.route('/')
 .all((req,res,next) => {
    res.statusCode=200;
    res.setHeader('Content-Type','text/plain');
@@ -25,25 +25,25 @@ promotionRouter.route('/')
     res.end('Deleting all the promotions');
  });
 
- promotionRouter.route('/:promotionId')
+ promoRouter.route('/:promoId')
 .all((req,res,next) => {
    res.statusCode=200;
    res.setHeader('Content-Type','text/plain');
    next();
 })
 .get((req,res,next) => {
-    res.end('Will send details of the promotion '+ req.params.promotionId +' to you!');
+    res.end('Will send details of the promotion '+ req.params.promoId +' to you!');
  })
  .put((req,res,next) => {
-    res.write('Updating the promotion: '+req.params.promotionId+'\n');
+    res.write('Updating the promotion: '+req.params.promoId+'\n');
     res.end('Will update the promotion: '+ req.body.name +' with details: '+ req.body.description);
  })
  .post((req,res,next) => {
     res.statusCode=403;
-    res.end('Post operation is not supported on /promotions/'+req.params.promotionId);
+    res.end('Post operation is not supported on /promotions/'+req.params.promoId);
  })
  .delete((req,res,next) => {
-    res.end('Deleting the promotion: '+req.params.promotionId);
+    res.end('Deleting the promotion: '+req.params.promoId);
  });
 
- module.exports = promotionRouter;
+ module.exports = promoRouter;
